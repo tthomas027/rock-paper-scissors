@@ -1,0 +1,1 @@
+Plays rock paper scissors in the javascript console.
