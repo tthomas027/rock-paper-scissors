@@ -20,23 +20,23 @@ function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     // check if playerSelection equals computerSelection
     if (playerSelection === computerSelection) {
-        return "It's a tie!"
+        return 'tie'
     }
     // check if playerSelection beats computerSelection
     if (playerSelection === 'rock' && computerSelection === 'scissors') {
-        return 'You Win! Rock beats Scissors'
+        return 'win';
     } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        return 'You Win! Paper beats Rock'
+        return 'win';
     } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        return 'You Win! Scissors beats Paper'
+        return 'win';
     }
     // check if computerSelection beats playerSelection
     if (playerSelection === 'rock' && computerSelection === 'paper') {
-        return 'You Lose! Paper beats Rock'
+        return 'loss'
     } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        return 'You Lose! Paper beats Scissors'
+        return 'loss'
     } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        return 'You Lose! Rock beats Scissors'
+        return 'loss'
     }
 }
 
@@ -55,8 +55,29 @@ function game() {
             playerSelection = prompt("Invalid move! Try again")
         }
         
+        // get computer move
+        const computerSelection = computerPlay();
+
         // play the round and display result
-        console.log(playRound(playerSelection, computerPlay()));
+        let round = playRound(playerSelection, computerSelection);
+        if (round === 'tie') {
+            console.log("It's a tie!")
+        } else if (round === 'win') {
+            playerWins++;
+            console.log('You Win! ' + playerSelection + ' beats' + ' ' + computerSelection);
+        } else {
+            computerWins++;
+            console.log('You Lose! '  + playerSelection + ' beats' + ' ' + computerSelection);
+        }
+    }
+
+    console.log('Final Score: Player ' + playerWins + ' Computer ' + computerWins);
+    if (playerWins > computerWins) {
+        console.log('Player Wins!');
+    } else if (computerWins > playerWins) {
+        console.log('Computer Wins!');
+    } else {
+        console.log('Final Score is a Tie!');
     }
 
 }
