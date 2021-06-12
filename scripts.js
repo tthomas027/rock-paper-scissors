@@ -48,10 +48,15 @@ function game() {
     // play 5 round game
     for (let x = 0; x < 5; x++) {
         // get player move 
-        let playerSelection = prompt("Whats your move?")
+        let playerSelection = prompt("What is your move?")
         
         // check if move is valid
-        console.log(isValidSelection(playerSelection));
+        if (!isValidSelection(playerSelection)) {
+            playerSelection = prompt("Invalid move! Try again")
+        }
+        
+        // play the round and display result
+        console.log(playRound(playerSelection, computerPlay()));
     }
 
 }
