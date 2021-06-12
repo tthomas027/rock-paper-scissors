@@ -64,14 +64,16 @@ function game() {
             console.log("It's a tie!")
         } else if (round === 'win') {
             playerWins++;
-            console.log('You Win! ' + playerSelection + ' beats' + ' ' + computerSelection);
+            console.log('You Win! ' + capitalize(playerSelection) + ' beats' + ' ' + capitalize(computerSelection));
         } else {
             computerWins++;
-            console.log('You Lose! '  + playerSelection + ' beats' + ' ' + computerSelection);
+            console.log('You Lose! '  + capitalize(playerSelection) + ' beats' + ' ' + capitalize(computerSelection));
         }
     }
 
+    // display final score
     console.log('Final Score: Player ' + playerWins + ' Computer ' + computerWins);
+    // determine winner
     if (playerWins > computerWins) {
         console.log('Player Wins!');
     } else if (computerWins > playerWins) {
@@ -86,6 +88,10 @@ function isValidSelection(playerSelection) {
     playerSelection = playerSelection.toLowerCase();
     
     return playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissors';
+}
+
+function capitalize(string) {
+    return string[0].toUpperCase() + string.substring(1);
 }
 
 game();
