@@ -61,9 +61,20 @@ scissors.addEventListener('click', () => {
 function updateScore() {
   const playerScoreDiv = document.querySelector('#playerscore');
   const computerScoreDiv = document.querySelector('#computerscore');
+  const finalScore = document.querySelector('#finalscore');
 
   playerScoreDiv.textContent = 'Player: ' + playerScore;
   computerScoreDiv.textContent = 'Computer: ' + computerScore;
+
+  if (playerScore >= 5) {
+    finalScore.textContent = 'Player won 5 times! Game Over! Player is victorious!';
+    reset();
+  } else if (computerScore >= 5) {
+    finalScore.textContent = 'Computer won 5 times! Game Over! Computer is victorious!';
+    reset();
+  } else {
+    finalScore.textContent = '';
+  }
 }
 
 function displayResult(round, playerSelection, computerSelection) {
@@ -81,6 +92,11 @@ function displayResult(round, playerSelection, computerSelection) {
 
 function capitalize(string) {
   return string[0].toUpperCase() + string.substring(1);
+}
+
+function reset() {
+  playerScore = 0;
+  computerScore = 0;
 }
 
 window.addEventListener('click', updateScore);
