@@ -33,45 +33,29 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function didPlayerWin(result) {
-  if (result === 'tie') return;
-  
-  return result === 'win';
-}
-
-
 let playerScore = 0;
 let computerScore = 0;
 
 const rock = document.querySelector('#rock');
 rock.addEventListener('click', () => {
-  let result = didPlayerWin(playRound('rock', computerPlay()));
+  let computerSelection = computerPlay();
+  let round = playRound('rock', computerSelection);
 
-  if (result !== undefined && result) {
-    playerScore++;
-  } else if (result !== undefined && !result) {
-    computerScore++;
-  }
+  displayResult(round, 'rock', computerSelection);
 });
 const paper = document.querySelector('#paper');
 paper.addEventListener('click', () => {
-  let result = didPlayerWin(playRound('paper', computerPlay()));
+  let computerSelection = computerPlay();
+  let round = playRound('paper', computerSelection);
 
-  if (result !== undefined && result) {
-    playerScore++;
-  } else if (result !== undefined && !result) {
-    computerScore++;
-  }
+  displayResult(round, 'paper', computerSelection);
 });
 const scissors = document.querySelector('#scissors');
 scissors.addEventListener('click', () => {
-  let result = didPlayerWin(playRound('scissors', computerPlay()));
+  let computerSelection = computerPlay();
+  let round = playRound('scissors', computerSelection);
 
-  if (result !== undefined && result) {
-    playerScore++;
-  } else if (result !== undefined && !result) {
-    computerScore++;
-  }
+  displayResult(round, 'scissors', computerSelection);
 });
 
 function updateScore() {
@@ -80,6 +64,23 @@ function updateScore() {
 
   playerScoreDiv.textContent = 'Player: ' + playerScore;
   computerScoreDiv.textContent = 'Computer: ' + computerScore;
+}
+
+function displayResult(round, playerSelection, computerSelection) {
+  const result = document.querySelector('#result');
+  if (round === 'tie') {
+    result.textContent = "It's a tie!";
+  } else if (round === 'win') {
+    playerScore++;
+    result.textContent = 'Player wins the round! ' + capitalize(playerSelection) + ' beats' + ' ' + capitalize(computerSelection);
+  } else {
+    computerScore++;
+    result.textContent = 'Computer wins the round! ' + capitalize(playerSelection) + ' beats' + ' ' + capitalize(computerSelection);
+  }
+}
+
+function capitalize(string) {
+  return string[0].toUpperCase() + string.substring(1);
 }
 
 window.addEventListener('click', updateScore);
