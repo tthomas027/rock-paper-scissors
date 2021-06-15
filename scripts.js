@@ -47,14 +47,7 @@ function game() {
 
     // play 5 round game
     for (let x = 0; x < 5; x++) {
-        // get player move 
-        let playerSelection = prompt("What is your move?")
-        
-        // check if move is valid
-        if (!isValidSelection(playerSelection)) {
-            playerSelection = prompt("Invalid move! Try again")
-        }
-        
+
         // get computer move
         const computerSelection = computerPlay();
 
@@ -94,4 +87,15 @@ function capitalize(string) {
     return string[0].toUpperCase() + string.substring(1);
 }
 
-game();
+const rock = document.querySelector('#rock');
+rock.addEventListener('click', () => {
+  console.log(playRound('rock', computerPlay()));
+});
+const paper = document.querySelector('#paper');
+paper.addEventListener('click', () => {
+  console.log(playRound('paper', computerPlay()));
+});
+const scissors = document.querySelector('#scissors');
+scissors.addEventListener('click', () => {
+  console.log(playRound('scissors', computerPlay()));
+});
